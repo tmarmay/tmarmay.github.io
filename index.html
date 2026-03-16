@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tomas Marmay — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #181818;
+      --border: #242424;
+      --border-bright: #333333;
+      --text: #e8e8e8;
+      --text-muted: #888888;
+      --text-dim: #555555;
+      --accent: #f0c040;
+      --accent-dim: rgba(240, 192, 64, 0.12);
+      --accent-dim2: rgba(240, 192, 64, 0.06);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 52px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .header-name h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .header-name h1 span {
+      color: var(--accent);
+    }
+
+    .header-name .subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background: #f5d060;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-bright);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--text-muted);
+      transform: translateY(-1px);
+    }
+
+    /* ── META ROW ── */
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .meta-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .meta-item a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    section:nth-child(2) { animation-delay: 0.1s; }
+    section:nth-child(3) { animation-delay: 0.15s; }
+    section:nth-child(4) { animation-delay: 0.2s; }
+    section:nth-child(5) { animation-delay: 0.25s; }
+    section:nth-child(6) { animation-delay: 0.3s; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      max-width: 680px;
+    }
+
+    /* ── EXPERIENCE ── */
+    .experience-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .experience-item:last-child { border-bottom: none; }
+
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .exp-company:hover { opacity: 0.75; }
+
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: right;
+      grid-row: span 2;
+      align-self: start;
+      padding-top: 3px;
+      white-space: nowrap;
+    }
+
+    .exp-bullets {
+      grid-column: 1 / -1;
+      margin-top: 10px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .exp-bullets li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-item {
+      padding: 20px 0;
+    }
+
+    .edu-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .edu-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+    }
+
+    .tag-accent {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-color: rgba(240,192,64,0.25);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 5px 12px;
+      border-radius: 5px;
+      background: var(--surface2);
+      color: #aaaaaa;
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+    }
+
+    .skill-tag:hover {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-color: rgba(240,192,64,0.3);
+    }
+
+    .skills-category {
+      margin-bottom: 20px;
+    }
+
+    .skills-category-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .project-card-body {
+      padding: 18px 18px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .project-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project-card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .project-card-footer {
+      padding: 12px 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: var(--surface2);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LANGUAGES & CONTACT ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 560px) {
+      .two-col { grid-template-columns: 1fr; }
+      .header-top { flex-direction: column; }
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .contact-list li a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-list li a:hover { color: var(--accent); }
+
+    .contact-list li a svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-dim);
+      flex-shrink: 0;
+      transition: stroke 0.2s;
+    }
+
+    .contact-list li a:hover svg { stroke: var(--accent); }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .lang-item:last-child { border-bottom: none; }
+
+    .lang-name { color: var(--text); }
+
+    .lang-level {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .lang-level a {
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .lang-level a:hover { opacity: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PRINT / PDF ── */
+    @media print {
+      body { background: #fff !important; color: #111 !important; }
+      body::before { display: none; }
+      :root {
+        --bg: #fff;
+        --surface: #f5f5f5;
+        --surface2: #eeeeee;
+        --border: #dddddd;
+        --border-bright: #cccccc;
+        --text: #111111;
+        --text-muted: #444444;
+        --text-dim: #888888;
+        --accent: #c08000;
+        --accent-dim: rgba(192,128,0,0.1);
+      }
+      .btn-primary { display: none; }
+      .page { padding: 0; max-width: 100%; }
+      section { animation: none; }
+      header { animation: none; }
+      .project-card:hover { transform: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-top">
+      <div class="header-name">
+        <h1><span>Tomas</span> Marmay</h1>
+        <p class="subtitle">Python Backend · Django · REST APIs · Linux</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" onclick="window.print()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </button>
+        <a href="https://github.com/tmarmay" target="_blank" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/></svg>
+        Córdoba, Argentina
+      </span>
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+        Argentine & Italian
+      </span>
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+        Open to remote or relocation
+      </span>
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+        <a href="mailto:tomasmarmay21@gmail.com">tomasmarmay21@gmail.com</a>
+      </span>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section>
+    <p class="section-label">About</p>
+    <p class="about-text">
+      I'm a Computer Scientist finishing my degree at FAMAF (Universidad Nacional de Córdoba) — one of the most rigorous CS programs in Latin America. Just the thesis left. I enjoy the theoretical side of computing as much as the practical one: understanding <em>why</em> things work, not just how to make them work. I've been building and shipping real backend systems for the past couple of years, and I like the challenge of making things that actually hold up in production.
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <p class="section-label">Experience</p>
+
+    <div class="experience-item">
+      <div class="exp-title">CTO & Backend Developer</div>
+      <div class="exp-date">2024 — Present</div>
+      <a href="https://agrofletes.com" target="_blank" class="exp-company">agrofletes.com</a>
+      <ul class="exp-bullets">
+        <li>Lead backend development using Python, Django and Django REST Framework.</li>
+        <li>Designed and maintained the backend architecture supporting logistics workflows and real-time operations.</li>
+        <li>Configured Nginx, SSL certificates, Supervisor processes and uptime monitoring.</li>
+        <li>Part of the founding team — involved in strategic technical decisions from day one.</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-title">Freelance Web Developer</div>
+      <div class="exp-date">2023 — 2024</div>
+      <span class="exp-company" style="cursor:default;">Ecommerce — Remote</span>
+      <ul class="exp-bullets">
+        <li>Built two ecommerce platforms from scratch: <a href="https://avikeli.com" target="_blank" style="color:var(--accent);text-decoration:none;">avikeli.com</a> and <a href="https://pedidos-papaquick.com" target="_blank" style="color:var(--accent);text-decoration:none;">pedidos-papaquick.com</a>.</li>
+        <li>Designed system architecture and implemented all backend logic.</li>
+        <li>Integrated inventory management, order flows and user handling.</li>
+        <li>Deployed, maintained and improved production servers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <p class="section-label">Education</p>
+    <div class="edu-item">
+      <div class="edu-title">Bachelor's in Computer Science</div>
+      <div class="edu-school">FAMAF – Universidad Nacional de Córdoba &nbsp;·&nbsp; 2021 – Present</div>
+      <div class="edu-meta">
+        <span class="tag tag-accent">Thesis stage</span>
+        <span class="tag">25 / 26 courses done</span>
+        <span class="tag">GPA 7.6 / 10</span>
+        <span class="tag">5-year MSc-level program</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <p class="section-label">Skills</p>
+    <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:20px;font-family:'DM Mono',monospace;">Things I've worked with at some point — university, projects, or just curiosity.</p>
+
+    <div class="skills-category">
+      <p class="skills-category-label">Languages</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Haskell</span>
+        <span class="skill-tag">OCaml</span>
+        <span class="skill-tag">RISC-V Assembly</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <p class="skills-category-label">Frameworks & Libraries</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">Django REST Framework</span>
+        <span class="skill-tag">FastAPI</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <p class="skills-category-label">Tools & Infrastructure</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Nginx</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">OMNeT++</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section>
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+
+      <a href="https://agrofletes.com" target="_blank" class="project-card">
+        <div class="project-card-body">
+          <div class="project-card-title">agrofletes.com</div>
+          <div class="project-card-desc">Uber-style logistics platform for agricultural transport in Argentina. Built and maintained the entire backend infrastructure from scratch.</div>
+        </div>
+        <div class="project-card-footer">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Django</span>
+          <span class="project-tag">Nginx</span>
+          <span class="project-tag">Linux</span>
+        </div>
+      </a>
+
+      <a href="https://avikeli.com" target="_blank" class="project-card">
+        <div class="project-card-body">
+          <div class="project-card-title">avikeli.com</div>
+          <div class="project-card-desc">Full ecommerce platform built from scratch. Inventory management, order handling, user flows and production server setup.</div>
+        </div>
+        <div class="project-card-footer">
+          <span class="project-tag">Django</span>
+          <span class="project-tag">PostgreSQL</span>
+          <span class="project-tag">REST API</span>
+        </div>
+      </a>
+
+      <a href="https://pedidos-papaquick.com" target="_blank" class="project-card">
+        <div class="project-card-body">
+          <div class="project-card-title">pedidos-papaquick.com</div>
+          <div class="project-card-desc">Second ecommerce site, same stack. Focused on fast order processing and a clean user experience for a food delivery business.</div>
+        </div>
+        <div class="project-card-footer">
+          <span class="project-tag">Django</span>
+          <span class="project-tag">PostgreSQL</span>
+          <span class="project-tag">Linux</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- LANGUAGES & CONTACT -->
+  <section>
+    <p class="section-label">Languages & Contact</p>
+    <div class="two-col">
+      <div>
+        <div class="lang-item">
+          <span class="lang-name">Spanish</span>
+          <span class="lang-level">Native</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <!-- REPLACE THE HREF BELOW WITH YOUR DRIVE LINK -->
+          <span class="lang-level">C1 Advanced &nbsp;<a href="YOUR_DRIVE_LINK_HERE" target="_blank">EF SET 63/100 ↗</a></span>
+        </div>
+      </div>
+      <ul class="contact-list">
+        <li>
+          <a href="mailto:tomasmarmay21@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+            tomasmarmay21@gmail.com
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/tmarmay" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            github.com/tmarmay
+          </a>
+        </li>
+        <li>
+          <a href="https://kaggle.com/tomasmarmay" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            kaggle.com/tomasmarmay
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Tomas Marmay
+  </footer>
+
+</div>
+</body>
+</html>
